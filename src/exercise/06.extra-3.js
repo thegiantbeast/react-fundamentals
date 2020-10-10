@@ -1,14 +1,17 @@
 // Basic Forms
 // http://localhost:3000/isolated/exercise/06.js
 
-import React from 'react'
+import React, { useState } from 'react'
 
 function UsernameForm({onSubmitUsername}) {
+  const [username, setUsername] = useState('')
+
+  const handleChange = (event) => {
+    setUsername(event.target.value.toLowerCase())
+  }
+
   const handleSubmit = (event) => {
     event.preventDefault()
-
-    const username = event.target.elements.username.value
-    
     onSubmitUsername(username)
   }
 
@@ -16,7 +19,7 @@ function UsernameForm({onSubmitUsername}) {
     <form onSubmit={handleSubmit}>
       <div>
         <label htmlFor="username">Username:</label>
-        <input type="text" id="username" />
+        <input type="text" id="username" onChange={handleChange} value={username} />
       </div>
       <button type="submit">Submit</button>
     </form>
